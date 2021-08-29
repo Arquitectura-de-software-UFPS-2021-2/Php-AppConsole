@@ -11,7 +11,7 @@ class Convertidor
     {
         while (true) {
             try {
-                print("Elige la opción que quieres elegir \n 1. Salir \n 2. Convertir un documento S \n 3. Test API \n");
+                print("Elige la opción que quieres elegir \n 1. Salir \n 2. Convertir un Documento \n 3. Test API \n");
                 $opcion = readline();
             } catch (\Throwable $th) {
                 print($th->getMessage());
@@ -23,7 +23,7 @@ class Convertidor
             if ($opcion == 2) {
                 $tipo = $this->seleccionarTipoDocumento();
                 if ($tipo != null) {
-                    print("El tipo seleccionado fue: {$tipo} \n");
+                    print("El tipo de formato seleccionado fue: {$tipo} \n");
                 } else {
                     print("No se ha seleccionado ninguna opción. \n");
                 }
@@ -93,7 +93,7 @@ class Convertidor
         curl_close($curl);
 
         if ($error) {
-            echo "cURL error #:" . $error; // mostramos el error
+            echo "URL error #:" . $error; // mostramos el error
         } else {
 
             $res = json_decode($response);
