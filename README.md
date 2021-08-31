@@ -15,6 +15,6 @@ Una vez clonado el Repositorio, por medio de la consola, utilizando el comando `
   ```
   estando ubicado en la Carpeta Raiz, ejecutaremos el comando ``` php convert.php ```, una vez hecho esto se mostrará el menú de Opciones, que ofrece la Aplicación
 # Autores :busts_in_silhouette:
-- **Andrés Camilo Yañez** 
-- **Luis Alejandro Jiménez** - *Documentación*
-- **Nelson Eduardo Amaya**  
+- **Andrés Camilo Yañez** - - [CamiloEscobar98](https://github.com/CamiloEscobar98)
+- **Luis Alejandro Jiménez** - *Documentación* - [alejandrojimenez9](https://github.com/alejandrojimenez9)
+- **Nelson Eduardo Amaya** - - [NelsonAmayaCalderon19](https://github.com/NelsonAmayaCalderon19)
