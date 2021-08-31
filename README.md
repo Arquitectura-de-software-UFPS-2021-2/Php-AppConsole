@@ -13,7 +13,7 @@ Una vez clonado el Repositorio, por medio de la consola, utilizando el comando `
   ```
   /Users/MiPC/Documents/Php-AppConsole/
   ```
-  estando ubicado en la Carpeta Raiz, ejecutaremos el comando ``` php Php-AppConsole ```, una vez hecho esto se mostrará el menú de Opciones, que ofrece la Aplicación
+  estando ubicado en la Carpeta Raiz, ejecutaremos el comando ``` php convert.php ```, una vez hecho esto se mostrará el menú de Opciones, que ofrece la Aplicación
 # Autores :busts_in_silhouette:
 - **Andrés Camilo Yañez** 
 - **Luis Alejandro Jiménez** - *Documentación*
