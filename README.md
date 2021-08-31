@@ -2,7 +2,7 @@
 _Se desarrolló una aplicación de Consola usando el lenguaje PHP para convertir Documentos Microsoft Office (.DOCX, .XLSX, .PPTX) a Documentos OpenOffice (.ODT, .ODS, .ODP), también cualquier de los formatos anteriores a PDF y viceversa._
 
 ## Instalación  💻
-1. Clonar este proyecto.
+Lo Primero que debemos hacer es abrir la consola (Terminal) de nuestro equipo, y procedemos a Clonar el Proyecto, para ello ingresaremos el siguiente comando: 
   ```
   git clone https://github.com/Arquitectura-de-software-UFPS-2021-2/Php-AppConsole.git
   ```
