@@ -8,12 +8,12 @@ _Se desarrolló una aplicación de Consola usando el lenguaje PHP para convertir
   ```
 ## Instrucciones de uso :page_facing_up:
 ### Ejecutando la Aplicación 🧨
-Una Vez clonado el Repositorio, dentro de la consola utilizando el comando ``` cd ``` nos ubicaremos dentro de la carpeta raiz del Proyecto
+Una vez clonado el Repositorio, por medio de la consola, utilizando el comando ``` cd ``` nos ubicaremos dentro de la carpeta raiz del Proyecto
   Ejemplo:
   ```
   /Users/MiPC/Documents/Php-AppConsole/
   ```
-  
+  estando ya dentro de la Carpeta Raiz, ejecutaremos el comando ``` php Php-AppConsole ```, una vez hecho esto se mostrará el menú de Opciones, que ofrece la Aplicación
 # Autores :busts_in_silhouette:
 - **Andrés Camilo Yañez** 
 - **Luis Alejandro Jiménez** - *Documentación*
