@@ -112,7 +112,7 @@ class Convertidor
     public function cargarArchivo($nombre, $tipo)
     {
         $tipo2 = $this->getTipo($tipo);
-        echo "Nombre escrito: {$nombre} \n";
+        // echo "Nombre escrito: {$nombre} \n";
 
         $existe = file_exists($nombre) ? "Si existe" : "No existe";
         if (file_exists($nombre)) {
@@ -145,22 +145,26 @@ class Convertidor
 
     public function convertir($base64, $tipo, $formato, $nombre)
     {
-        print("ENTRO ACÁ CONVERTIR \n {$base64} \n destino: {$tipo} \n origen: {$formato} \n nombrearchivo: {$nombre} \n");
-        $archivo = [
+        //  print("ENTRO ACÁ CONVERTIR \n {$base64} \n destino: {$tipo} \n origen: {$formato} \n nombrearchivo: {$nombre} \n");
+        $archivo = array(
             'base64' => $base64,
             'extensionDestino' => $tipo,
             'extensionFuente' => $formato,
             'nombreArchivo' => $nombre
-        ];
+        );
 
-        // print($archivo);
+        $encode_archivo = json_encode($archivo);
+
+        // print($encode_archivo);
 
         $curl = curl_init();
+        // curl_setopt($curl, CURLOPT_POSTFIELDS, $encode_archivo);
         curl_setopt_array($curl, array(
             CURLOPT_URL => "http://54.163.147.33:8080/convertir",
-            CURLOPT_POST, TRUE,
+            CURLOPT_POST => TRUE,
             CURLOPT_POSTFIELDS => json_encode($archivo),
-           // CURLOPT_POSTFIELDS => "base64={$base64}&extensionDestino={$tipo}&extensionFuente={$formato}&nombreArchivo={$nombre}",
+            CURLOPT_HTTPHEADER => array('Content-Type:application/json'),
+            // CURLOPT_POSTFIELDS => "base64={$base64}&extensionDestino={$tipo}&extensionFuente={$formato}&nombreArchivo={$nombre}",
             CURLOPT_RETURNTRANSFER => TRUE,
         ));
         curl_setopt($curl, CURLOPT_PROXY, '');
@@ -172,9 +176,10 @@ class Convertidor
         if ($error) {
             print("URL error #:" . $error); // mostramos el error
         } else {
-            print("NO DIÓ ERROR");
+            print("NO DIÓ ERROR \n");
             $res = json_decode($response);
-            print($response . "\n"); // en caso de funcionar correctamente
+            print("\n");
+            print($response); // en caso de funcionar correctamente
         }
     }
 
