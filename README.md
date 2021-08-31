@@ -1,5 +1,5 @@
 # Aplicación de Consola del Grupo de Trabajo - Lenguaje ![alt text](https://www.php.net/images/logos/php-med-trans-dark.gif)  
-_Se desarrolló una aplicación de Consola usando el lenguaje PHP para convertir Documentos Microsoft Office (.DOCX, .XLSX, .PPTX) a Documentos OpenOffice (.ODT, .ODS, .ODP), también cualquier de los formatos anteriores a PDF y viceversa._
+_Se desarrolló una aplicación de Consola usando el lenguaje **PHP** para convertir Documentos Microsoft Office (.DOCX, .XLSX, .PPTX) a Documentos OpenOffice (.ODT, .ODS, .ODP), también cualquier de los formatos anteriores a PDF y viceversa._
 
 ## Instalación  💻
 Lo Primero que debemos hacer es abrir la consola (Terminal) de nuestro equipo, y procedemos a Clonar el Proyecto, para ello ingresaremos el siguiente comando: 
