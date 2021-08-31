@@ -23,8 +23,13 @@ class Convertidor
             if ($opcion == 2) {
                 $tipo = $this->seleccionarTipoDocumento();
                 if ($tipo != null) {
-                    $this->seleccionarArchivo();
                     print("El tipo de formato seleccionado fue: {$tipo} \n");
+                    $nombre =  $this->seleccionarArchivo();
+                    if ($nombre) {
+                        $cargar =  $this->cargarArchivo($nombre, $tipo);
+                    } else {
+                        print("No se escribió un nombre. \n");
+                    }
                 } else {
                     print("No se ha seleccionado ninguna opción. \n");
                 }
@@ -46,11 +51,9 @@ class Convertidor
             } catch (\Throwable $th) {
                 print($th->getMessage());
             }
-            if ($tipo > 1 && $tipo < 4) {
-                if ($tipo == 4) {
-                    $tipoSelected = $this->getTipo($tipo);
-                    break;
-                }
+            if ($tipo >= 1 && $tipo <= 4) {
+                $tipoSelected = $tipo;
+                break;
             }
         }
         return $tipoSelected;
@@ -61,17 +64,17 @@ class Convertidor
         $archivo = null;
         while (true) {
             try {
-                print("Por favor escribe el nombre del archivo: (ESTE DEBE DE ESTAR EN LA RAIZ DE LA APLICACIÓN \n");
+                print("Por favor escribe el nombre del archivo: (ESTE DEBE DE ESTAR EN LA RAIZ DE LA APLICACIÓN \n Si quieres volver atrás oprime 0 \n");
                 $nombre = readline();
-                //print("::: {$tipo} \n");
             } catch (\Throwable $th) {
                 print($th->getMessage());
             }
-            if ($nombre == "" || $nombre == null || $nombre == " ") {
-                echo "entro acá";
-            } else {
+            if ($nombre) {
                 $archivo = $nombre;
                 break;
+            }
+            if ($nombre == 0) {
+                return null;
             }
         }
         return $archivo;
@@ -81,31 +84,109 @@ class Convertidor
     {
         switch ($tipo) {
             case 1:
-                return "DOCX";
+                return "docx";
                 break;
             case 2:
-                return "XLSX";
+                return "xlsx";
                 break;
             case 3:
-                return "PPTX";
+                return "pptx";
+                break;
+        }
+    }
+    public function toTipo($tipo)
+    {
+        switch ($tipo) {
+            case 1:
+                return "odt";
+                break;
+            case 2:
+                return "ods";
+                break;
+            case 3:
+                return "odp";
                 break;
         }
     }
 
-    public function cargarArchivo($nombre)
+    public function cargarArchivo($nombre, $tipo)
     {
-        echo "Nombre escrito: {$nombre}";
+        $tipo2 = $this->getTipo($tipo);
+        echo "Nombre escrito: {$nombre} \n";
+
+        $existe = file_exists($nombre) ? "Si existe" : "No existe";
+        if (file_exists($nombre)) {
+            // print("Existe el archivo: {$existe} \n");
+            $formato = pathinfo($nombre, PATHINFO_EXTENSION);
+            // print("Formato archivo: {$formato} \n {$tipo}");
+            if ($formato == $tipo2) {
+
+                $contenido = file_get_contents($nombre, false);
+
+                $base64 = base64_encode($contenido);
+
+                $this->convertir($base64, $this->toTipo($tipo), $formato, $nombre);
+            } else {
+                print("El formato no es el mismo \n");
+                return null;
+            }
+        } else {
+            print("El formato no existe \n");
+            return null;
+        }
+
+
+
+
+
+
+        // print($base64);
     }
+
+    public function convertir($base64, $tipo, $formato, $nombre)
+    {
+        print("ENTRO ACÁ CONVERTIR \n {$base64} \n destino: {$tipo} \n origen: {$formato} \n nombrearchivo: {$nombre} \n");
+        $archivo = [
+            'base64' => $base64,
+            'extensionDestino' => $tipo,
+            'extensionFuente' => $formato,
+            'nombreArchivo' => $nombre
+        ];
+
+        // print($archivo);
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "http://54.163.147.33:8080/convertir",
+            CURLOPT_POST, TRUE,
+            CURLOPT_POSTFIELDS => json_encode($archivo),
+           // CURLOPT_POSTFIELDS => "base64={$base64}&extensionDestino={$tipo}&extensionFuente={$formato}&nombreArchivo={$nombre}",
+            CURLOPT_RETURNTRANSFER => TRUE,
+        ));
+        curl_setopt($curl, CURLOPT_PROXY, '');
+        $response = curl_exec($curl);
+        $error = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($error) {
+            print("URL error #:" . $error); // mostramos el error
+        } else {
+            print("NO DIÓ ERROR");
+            $res = json_decode($response);
+            print($response . "\n"); // en caso de funcionar correctamente
+        }
+    }
+
 
     public function  testURL()
     {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.mercadolibre.com/users/226384143",
+            CURLOPT_URL => "http://54.163.147.33:8080/convertir",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_ENCODING => ""
         ));
 
         $response = curl_exec($curl);
@@ -116,7 +197,6 @@ class Convertidor
         if ($error) {
             echo "URL error #:" . $error; // mostramos el error
         } else {
-
             $res = json_decode($response);
             echo $response . "\n"; // en caso de funcionar correctamente
         }
