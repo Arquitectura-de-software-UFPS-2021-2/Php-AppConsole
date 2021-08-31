@@ -182,11 +182,9 @@ class Convertidor
        $encode_archivo = json_encode($archivo);
         //print($encode_archivo);
         $decode_archivo = base64_decode($base64);
-        /*$decode_archivo = base64_decode(str_replace(PHP_EOL, '""', $base64));*/
         $documento = fopen($nom.'.'.$tipo, 'w');
-        //$documento = fopen('test.pdf', 'w');
         fwrite($documento, $decode_archivo);
-        fclose($documento);
+        fclose($documento);  //Descarga el Archivo pero genera error al abrirlo , TOCA CORREGIRLO
         $curl = curl_init();
         // curl_setopt($curl, CURLOPT_POSTFIELDS, $encode_archivo);
         curl_setopt_array($curl, array(
