@@ -10,5 +10,5 @@ Se desarrolló una aplicación de Consola usando el lenguaje PHP para convertir 
 # Instrucciones de uso :page_facing_up:
 # Autores :busts_in_silhouette:
 - **Andrés Camilo Yañez** 
-- **Luis Alejandro Jiménez** - *Documentación* - @alejandrojimenez9
+- **Luis Alejandro Jiménez** - *Documentación*
 - **Nelson Eduardo Amaya**  
