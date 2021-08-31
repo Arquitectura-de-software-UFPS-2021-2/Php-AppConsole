@@ -45,13 +45,13 @@ class Convertidor
         $tipoSelected = null;
         while (true) {
             try {
-                print("Elige el formato de documento que quieres convertir: \n 1. DOCX => ODT \n 2. XLSX => ODS \n 3. PPTX => ODP \n 4. Atrás \n");
+                print("Elige el formato de documento que quieres convertir: \n 1. DOCX => ODT \n 2. ODT => DOCX \n 3. XLSX => ODS \n 4. ODS => XLSX \n 5. PPTX => ODP \n 6. ODP => PPTX \n 7. Cualquier Formato (DOCX,ODT,XLSX,ODS,PPTX,ODP) => PDF \n 8. PDF => Cualquier Formato (DOCX,ODT,XLSX,ODS,PPTX,ODP) \n");
                 $tipo = readline();
                 //print("::: {$tipo} \n");
             } catch (\Throwable $th) {
                 print($th->getMessage());
             }
-            if ($tipo >= 1 && $tipo <= 4) {
+            if ($tipo >= 1 && $tipo <= 8) {
                 $tipoSelected = $tipo;
                 break;
             }
@@ -64,7 +64,7 @@ class Convertidor
         $archivo = null;
         while (true) {
             try {
-                print("Por favor escribe el nombre del archivo: (ESTE DEBE DE ESTAR EN LA RAIZ DE LA APLICACIÓN \n Si quieres volver atrás oprime 0 \n");
+                print("Por favor escribe el nombre del archivo (ESTE DEBE DE ESTAR EN LA RAIZ DE LA APLICACIÓN \n Si quieres volver atrás oprime 0 \n");
                 $nombre = readline();
             } catch (\Throwable $th) {
                 print($th->getMessage());
@@ -87,10 +87,25 @@ class Convertidor
                 return "docx";
                 break;
             case 2:
-                return "xlsx";
+                return "odt";
                 break;
             case 3:
+                return "xlsx";
+                break;
+            case 4:
+                return "ods";
+                break;
+            case 5:
                 return "pptx";
+                break;
+            case 6:
+                return "odp";
+                break;
+            case 7:
+                return "otro";
+                break;
+            case 8:
+                return "pdf";
                 break;
         }
     }
@@ -101,10 +116,25 @@ class Convertidor
                 return "odt";
                 break;
             case 2:
-                return "ods";
+                return "docx";
                 break;
             case 3:
+                return "ods";
+                break;
+            case 4:
+                return "xlsx";
+                break;
+            case 5:
                 return "odp";
+                break;
+            case 6:
+                return "pptx";
+                break;
+            case 7:
+                return "pdf";
+                break;
+            case 8:
+                return "otro";//Falta Corregir Este
                 break;
         }
     }
@@ -118,32 +148,28 @@ class Convertidor
         if (file_exists($nombre)) {
             // print("Existe el archivo: {$existe} \n");
             $formato = pathinfo($nombre, PATHINFO_EXTENSION);
+            $nom = pathinfo($nombre, PATHINFO_FILENAME);
             // print("Formato archivo: {$formato} \n {$tipo}");
-            if ($formato == $tipo2) {
+            if ($formato == $tipo2 || $tipo2 == "otro") {
 
                 $contenido = file_get_contents($nombre, false);
 
                 $base64 = base64_encode($contenido);
 
-                $this->convertir($base64, $this->toTipo($tipo), $formato, $nombre);
-            } else {
+                $this->convertir($base64, $this->toTipo($tipo), $formato, $nombre, $nom);
+            } else {                   
                 print("El formato no es el mismo \n");
                 return null;
+            
             }
         } else {
             print("El formato no existe \n");
             return null;
         }
-
-
-
-
-
-
         // print($base64);
     }
 
-    public function convertir($base64, $tipo, $formato, $nombre)
+    public function convertir($base64, $tipo, $formato, $nombre, $nom)
     {
         //  print("ENTRO ACÁ CONVERTIR \n {$base64} \n destino: {$tipo} \n origen: {$formato} \n nombrearchivo: {$nombre} \n");
         $archivo = array(
@@ -153,10 +179,14 @@ class Convertidor
             'nombreArchivo' => $nombre
         );
 
-        $encode_archivo = json_encode($archivo);
-
-        // print($encode_archivo);
-
+       $encode_archivo = json_encode($archivo);
+        //print($encode_archivo);
+        $decode_archivo = base64_decode($base64);
+        /*$decode_archivo = base64_decode(str_replace(PHP_EOL, '""', $base64));*/
+        $documento = fopen($nom.'.'.$tipo, 'w');
+        //$documento = fopen('test.pdf', 'w');
+        fwrite($documento, $decode_archivo);
+        fclose($documento);
         $curl = curl_init();
         // curl_setopt($curl, CURLOPT_POSTFIELDS, $encode_archivo);
         curl_setopt_array($curl, array(
