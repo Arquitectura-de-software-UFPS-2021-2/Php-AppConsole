@@ -14,7 +14,10 @@ Una vez clonado el Repositorio, por medio de la consola, utilizando el comando `
   /Users/MiPC/Documents/Php-AppConsole/
   ```
   estando ubicado en la Carpeta Raiz, ejecutaremos el comando ``` php convert.php ``` una vez hecho esto se mostrará el menú de Opciones que ofrece la Aplicación y podras realizar las conversiones de Documentos que necesites.  **_Así que Manos a la Obra 💪⌨_**
-# Autores :busts_in_silhouette:
+## Construido con 🛠
+  - **_PHP 7.4_** - *Lenguaje de Programación*
+
+## Autores :busts_in_silhouette:
 - **Andrés Camilo Yañez** - - [CamiloEscobar98](https://github.com/CamiloEscobar98)
 - **Luis Alejandro Jiménez** - *Documentación* - [alejandrojimenez9](https://github.com/alejandrojimenez9)
 - **Nelson Eduardo Amaya** - - [NelsonAmayaCalderon19](https://github.com/NelsonAmayaCalderon19)
