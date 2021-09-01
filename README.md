@@ -9,6 +9,7 @@ Lo Primero que debemos hacer es abrir la consola (Terminal) de nuestro equipo, y
   git clone https://github.com/Arquitectura-de-software-UFPS-2021-2/Php-AppConsole.git
   ```
 ## Instrucciones de uso :page_facing_up:
+# ![alt text](https://upload.wikimedia.org/wikipedia/commons/2/2a/Windows_Logo_2012-2015.png) 
 ### Pre-Requisitos
 1. Debe tener instalado en su ordenador, una de las versiones mas recientes de PHP, preferiblemente de la Versión 7.0 en adelante.
 2. Ingresar a ```"Editar las variables de entorno del sistema"``` dentro del Panel de Control de Windows, estando allí, daremos clic en ```"Variabes de Entorno"```, como se observa en la siguiente imagen:
@@ -28,6 +29,9 @@ Una vez clonado el Repositorio, por medio de la consola, utilizando el comando `
   /Users/MiPC/Documents/Php-AppConsole/
   ```
   estando ubicado en la Carpeta Raiz, ejecutaremos el comando ``` php convert.php ``` una vez hecho esto se mostrará el menú de Opciones que ofrece la Aplicación y podras realizar las conversiones de Documentos que necesites.  **_Así que Manos a la Obra 💪⌨_**
+
+# ![alt text](https://upload.wikimedia.org/wikipedia/commons/1/11/SO-Linux.jpg)
+Si eres usuario de Linux, deberías poder encontrarlo en /usr/bin/php o simplemente puedes usar el atajo `php`desde cualquier directorio.
 ## Construido con 🛠
   - **_PHP 7.4_** - *Lenguaje de Programación*
 
