@@ -31,7 +31,15 @@ Una vez clonado el Repositorio, por medio de la consola, utilizando el comando `
   estando ubicado en la Carpeta Raiz, ejecutaremos el comando ``` php convert.php ``` una vez hecho esto se mostrará el menú de Opciones que ofrece la Aplicación y podras realizar las conversiones de Documentos que necesites.  **_Así que Manos a la Obra 💪⌨_**
 
 # ![alt text](https://upload.wikimedia.org/wikipedia/commons/1/11/SO-Linux.jpg)
+
 Si eres usuario de Linux, deberías poder encontrarlo en /usr/bin/php o simplemente puedes usar el atajo `php`desde cualquier directorio.
+
+Una vez que conozcas la ubicación de tu archivo ejecutable de PHP, solo necesitas proporcionar el nombre del archivo PHP que quieras ejecutar desde la interfaz de línea de comandos.
+
+**Ejemplo:**
+
+`php doconvert.php`
+
 ## Construido con 🛠
   - **_PHP 7.4_** - *Lenguaje de Programación*
 
