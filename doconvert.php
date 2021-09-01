@@ -50,24 +50,15 @@ class Convertidor
         $tipoSelected = null;
         while (true) {
             try {
-<<<<<<< HEAD:convert.php
-                print("Elige el formato de documento que quieres convertir: \n 1. DOCX => ODT \n 2. ODT => DOCX \n 3. XLSX => ODS \n 4. ODS => XLSX \n 5. PPTX => ODP \n 6. ODP => PPTX \n 7. Cualquier Formato (DOCX,ODT,XLSX,ODS,PPTX,ODP) => PDF \n 8. PDF => Cualquier Formato (DOCX,ODT,XLSX,ODS,PPTX,ODP) \n");
-=======
                 print("Elige el formato de documento que quieres convertir: \n [0] Atrás. \n [1] DOCX => ODT \n [2] XLSX => ODS \n [3] PPTX => ODP \n [4] Cualquier formato => PDF \n \n [5] ODT => DOCX \n [6] ODS => XLSX \n [7] ODP => PPTX \n");
->>>>>>> dev:doconvert.php
                 $tipo = readline();
-                //print("::: {$tipo} \n");
             } catch (\Throwable $th) {
                 print($th->getMessage());
             }
-<<<<<<< HEAD:convert.php
-            if ($tipo >= 1 && $tipo <= 8) {
-=======
             if ($tipo == 0) {
                 return null;
             }
             if ($tipo >= 1 && $tipo <= 7) {
->>>>>>> dev:doconvert.php
                 $tipoSelected = $tipo;
                 break;
             }
@@ -80,11 +71,7 @@ class Convertidor
         $archivo = null;
         while (true) {
             try {
-<<<<<<< HEAD:convert.php
-                print("Por favor escribe el nombre del archivo (ESTE DEBE DE ESTAR EN LA RAIZ DE LA APLICACIÓN \n Si quieres volver atrás oprime 0 \n");
-=======
                 print("Por favor escribe el nombre del archivo: (ESTE DEBE DE ESTAR EN LA RAIZ DE LA APLICACIÓN) \n Ejemplo: prueba.docx \n Si quieres volver atrás oprime 0. \n");
->>>>>>> dev:doconvert.php
                 $nombre = readline();
             } catch (\Throwable $th) {
                 print($th->getMessage());
@@ -107,27 +94,11 @@ class Convertidor
                 return "docx";
                 break;
             case 2:
-                return "odt";
-                break;
-            case 3:
                 return "xlsx";
                 break;
-            case 4:
-                return "ods";
-                break;
-            case 5:
+            case 3:
                 return "pptx";
                 break;
-<<<<<<< HEAD:convert.php
-            case 6:
-                return "odp";
-                break;
-            case 7:
-                return "otro";
-                break;
-            case 8:
-                return "pdf";
-=======
             case 5:
                 return "odt";
                 break;
@@ -136,7 +107,6 @@ class Convertidor
                 break;
             case 7:
                 return "odp";
->>>>>>> dev:doconvert.php
                 break;
         }
     }
@@ -148,27 +118,11 @@ class Convertidor
                 return "odt";
                 break;
             case 2:
-                return "docx";
-                break;
-            case 3:
                 return "ods";
                 break;
-            case 4:
-                return "xlsx";
-                break;
-            case 5:
+            case 3:
                 return "odp";
                 break;
-<<<<<<< HEAD:convert.php
-            case 6:
-                return "pptx";
-                break;
-            case 7:
-                return "pdf";
-                break;
-            case 8:
-                return "otro";//Falta Corregir Este
-=======
             case 4:
                 return "pdf";
                 break;
@@ -180,7 +134,6 @@ class Convertidor
                 break;
             case 7:
                 return "pptx";
->>>>>>> dev:doconvert.php
                 break;
         }
     }
@@ -190,41 +143,25 @@ class Convertidor
         $tipo2 = ($tipo > 4) ? $this->getTipo($tipo) : $this->getTipo($tipo);
         if (file_exists($nombre)) {
             $formato = pathinfo($nombre, PATHINFO_EXTENSION);
-<<<<<<< HEAD:convert.php
-            $nom = pathinfo($nombre, PATHINFO_FILENAME);
-            // print("Formato archivo: {$formato} \n {$tipo}");
-            if ($formato == $tipo2 || $tipo2 == "otro") {
-=======
 
             if ($formato == $tipo2 || $tipo == 4) {
->>>>>>> dev:doconvert.php
 
                 $contenido = file_get_contents($nombre, false);
 
                 $base64 = base64_encode($contenido);
 
-<<<<<<< HEAD:convert.php
-                $this->convertir($base64, $this->toTipo($tipo), $formato, $nombre, $nom);
-            } else {                   
-=======
                 return $this->convertir($base64, $this->toTipo($tipo), $formato, $nombre);
             } else {
->>>>>>> dev:doconvert.php
                 print("El formato no es el mismo \n");
                 return null;
-            
             }
         } else {
             print("El formato no existe \n");
             return null;
         }
-<<<<<<< HEAD:convert.php
-        // print($base64);
-=======
->>>>>>> dev:doconvert.php
     }
 
-    public function convertir($base64, $tipo, $formato, $nombre, $nom)
+    public function convertir($base64, $tipo, $formato, $nombre)
     {
         $archivo = array(
             'base64' => $base64,
@@ -233,12 +170,8 @@ class Convertidor
             'nombreArchivo' => $nombre
         );
 
-<<<<<<< HEAD:convert.php
-       $encode_archivo = json_encode($archivo);
-        //print($encode_archivo);
-=======
+        // print(json_encode($archivo));
 
->>>>>>> dev:doconvert.php
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => "http://54.163.147.33:8080/convertir",
@@ -259,16 +192,29 @@ class Convertidor
         } else {
             $res = json_decode($response, true);
             print("\n");
+            if (isset($res['nombre']) && $res['nombre'] == 'Exception') {
+                print("Error: {$res['mensaje']} \n");
+                return null;
+            }
             return $this->crearArchivo($res);
         }
     }
 
     public function crearArchivo($res)
     {
-        $archivo = fopen($res['nombreArchivo'], 'w');
-        $contenido = base64_decode($res['base64']);
-        fwrite($archivo, $contenido);
-        return fclose($archivo);
+        if (isset($res['nombreArchivo'])) {
+            try {
+                $archivo = fopen($res['nombreArchivo'], 'w');
+                $contenido = base64_decode($res['base64']);
+                fwrite($archivo, $contenido);
+                return fclose($archivo);
+            } catch (\Throwable $th) {
+                print("error: " . $th->getMessage());
+            }
+        } else {
+            print("¡Error! No se pudo crear el archivo.");
+            return null;
+        }
     }
 
 
