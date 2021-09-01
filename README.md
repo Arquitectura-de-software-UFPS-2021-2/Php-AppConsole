@@ -22,5 +22,5 @@ Este es un proyecto open-source y nos interesa que lo apoyes haciendo cualquier 
 
 ## Autores :busts_in_silhouette:
 - **Andrés Camilo Yañez** - - [CamiloEscobar98](https://github.com/CamiloEscobar98)
-- **Luis Alejandro Jiménez** - *Documentación* - [alejandrojimenez9](https://github.com/alejandrojimenez9)
+- **Luis Alejandro Jiménez** - - [alejandrojimenez9](https://github.com/alejandrojimenez9)
 - **Nelson Eduardo Amaya** - - [NelsonAmayaCalderon19](https://github.com/NelsonAmayaCalderon19)
