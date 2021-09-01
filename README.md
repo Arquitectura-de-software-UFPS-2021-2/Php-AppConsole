@@ -17,6 +17,9 @@ Una vez clonado el Repositorio, por medio de la consola, utilizando el comando `
 ## Construido con 🛠
   - **_PHP 7.4_** - *Lenguaje de Programación*
 
+## Contribuyendo 📝
+Este es un proyecto open-source y nos interesa que lo apoyes haciendo cualquier contribución o mejora al código. 😉
+
 ## Autores :busts_in_silhouette:
 - **Andrés Camilo Yañez** - - [CamiloEscobar98](https://github.com/CamiloEscobar98)
 - **Luis Alejandro Jiménez** - *Documentación* - [alejandrojimenez9](https://github.com/alejandrojimenez9)
