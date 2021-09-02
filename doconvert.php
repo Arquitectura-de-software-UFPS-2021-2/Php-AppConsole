@@ -50,7 +50,7 @@ class Convertidor
         $tipoSelected = null;
         while (true) {
             try {
-                print("Elige el formato de documento que quieres convertir: \n [0] Atrás. \n [1] DOCX => ODT \n [2] XLSX => ODS \n [3] PPTX => ODP \n [4] Cualquier formato => PDF \n \n [5] ODT => DOCX \n [6] ODS => XLSX \n [7] ODP => PPTX \n");
+                print("Elige el formato de documento que quieres convertir: \n [0] Atrás. \n [1] DOCX => ODT \n [2] XLSX => ODS \n [3] PPTX => ODP \n [4] Cualquier formato (DOCX, ODT, XLSX, ODS, PPTX, ODP) => PDF \n \n [5] ODT => DOCX \n [6] ODS => XLSX \n [7] ODP => PPTX \n");
                 $tipo = readline();
             } catch (\Throwable $th) {
                 print($th->getMessage());
